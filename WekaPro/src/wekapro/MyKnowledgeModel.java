@@ -12,6 +12,7 @@ import weka.core.converters.ArffSaver;
 import weka.core.converters.CSVSaver;
 import weka.core.converters.ConverterUtils.DataSource;
 import weka.filters.Filter;
+import weka.filters.unsupervised.attribute.NominalToBinary;
 import weka.filters.unsupervised.attribute.NumericToNominal;
 import weka.filters.unsupervised.attribute.Remove;
 
@@ -68,7 +69,13 @@ public Instances convertData(Instances originalData) throws Exception{
         outData.writeBatch();
         System.out.println("Converted");
     }
-
+public Instances convert2Binary(Instances originalData) throws Exception{
+    NominalToBinary n2b = new NominalToBinary();
+    n2b.setOptions(this.data_option);
+    n2b.setBinaryAttributesNominal(true);
+    n2b.setInputFormat(originalData);
+    return  Filter.useFilter(originalData, n2b);
+}
     @Override
     public String toString() {
         return dataset.toSummaryString();

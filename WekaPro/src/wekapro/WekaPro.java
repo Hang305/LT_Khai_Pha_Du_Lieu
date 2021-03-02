@@ -21,11 +21,17 @@ public class WekaPro {
 //        model.saveData("E:\\\\KPDL\\\\BaiTap\\\\DuLieu\\\\supermarket01.arff");
 //        
 //        model.saveData2CSV("E:\\\\KPDL\\\\BaiTap\\\\DuLieu\\\\supermarket01.csv");
- MyAprioriModel model = new MyAprioriModel("E:\\KPDL\\BaiTap\\DuLieu\\weather.numberic.arff", 
-         "-N 10 -T 0 -C 0.9 -D 0.05 -U 1.0 -M 0.1 -S -1.0 -c -1", 
-         "-R 2-3");
- model.mineAssociationRules();
+
+//        MyAprioriModel model = new MyAprioriModel("E:\\KPDL\\BaiTap\\DuLieu\\weather.numberic.arff",
+//                "-N 10 -T 0 -C 0.9 -D 0.05 -U 1.0 -M 0.1 -S -1.0 -c -1",
+//                "-R 2-3");
+//        model.mineAssociationRules();
+//GPGrowth
+        MyFPGrowthModel model = new MyFPGrowthModel("E:\\\\KPDL\\\\BaiTap\\\\DuLieu\\\\weather.nominal.arff",
+                "-P 2 -I -1 -N 10 -T 0 -C 0.9 -D 0.05 -U 1.0 -M 0.1", 
+                "-R first-last");
+        model.mineAssociationRules();
         System.out.println(model);
     }
-    
+
 }
