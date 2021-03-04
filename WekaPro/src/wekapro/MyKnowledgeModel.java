@@ -5,6 +5,7 @@
  */
 package wekapro;
 
+import com.sun.xml.internal.ws.client.sei.ResponseBuilder;
 import java.io.File;
 import java.io.IOException;
 import weka.core.Instances;
@@ -15,6 +16,8 @@ import weka.filters.Filter;
 import weka.filters.unsupervised.attribute.NominalToBinary;
 import weka.filters.unsupervised.attribute.NumericToNominal;
 import weka.filters.unsupervised.attribute.Remove;
+import weka.filters.unsupervised.instance.RemovePercentage;
+import weka.filters.unsupervised.instance.Resample;
 
 /**
  *
@@ -26,6 +29,8 @@ public class MyKnowledgeModel {
     Instances dataset;
     String[] model_option;
     String[] data_option;
+    Instances testset;
+    Instances trainset;
 
     public MyKnowledgeModel() {
     }
@@ -33,8 +38,12 @@ public class MyKnowledgeModel {
     public MyKnowledgeModel(String filename, String m_opts, String d_opts) throws Exception {
         this.source = new DataSource(filename);
         this.dataset = source.getDataSet();
-        this.model_option = weka.core.Utils.splitOptions(m_opts);
-        this.data_option = weka.core.Utils.splitOptions(d_opts);
+        if (m_opts != null) {
+            this.model_option = weka.core.Utils.splitOptions(m_opts);
+        }
+        if (d_opts != null) {
+            this.data_option = weka.core.Utils.splitOptions(d_opts);
+        }
 
     }
 
@@ -48,12 +57,14 @@ public class MyKnowledgeModel {
         remove.setInputFormat(originalData);
         return Filter.useFilter(originalData, remove);
     }
-public Instances convertData(Instances originalData) throws Exception{
-    NumericToNominal n2n = new NumericToNominal();
-    n2n.setOptions(data_option);
-    n2n.setInputFormat(originalData);
-    return Filter.useFilter(originalData, n2n);
-}
+
+    public Instances convertData(Instances originalData) throws Exception {
+        NumericToNominal n2n = new NumericToNominal();
+        n2n.setOptions(data_option);
+        n2n.setInputFormat(originalData);
+        return Filter.useFilter(originalData, n2n);
+    }
+
     public void saveData(String filename) throws IOException {
         ArffSaver outData = new ArffSaver();
         outData.setInstances(this.dataset);
@@ -69,13 +80,32 @@ public Instances convertData(Instances originalData) throws Exception{
         outData.writeBatch();
         System.out.println("Converted");
     }
-public Instances convert2Binary(Instances originalData) throws Exception{
-    NominalToBinary n2b = new NominalToBinary();
-    n2b.setOptions(this.data_option);
-    n2b.setBinaryAttributesNominal(true);
-    n2b.setInputFormat(originalData);
-    return  Filter.useFilter(originalData, n2b);
-}
+
+    public Instances convert2Binary(Instances originalData) throws Exception {
+        NominalToBinary n2b = new NominalToBinary();
+        n2b.setOptions(this.data_option);
+        n2b.setBinaryAttributesNominal(true);
+        n2b.setInputFormat(originalData);
+        return Filter.useFilter(originalData, n2b);
+    }
+
+    public Instances divideTrainTest(Instances originalSet, double percent, boolean isTest) throws Exception {
+        RemovePercentage rp = new RemovePercentage();
+        rp.setPercentage(percent);
+        rp.setInvertSelection(isTest);
+        rp.setInputFormat(originalSet);
+        return Filter.useFilter(originalSet, rp);
+    }
+
+    public Instances divideTrainTestR(Instances originalSet, double percent, boolean isTest) throws Exception {
+        Resample rs = new Resample();
+        rs.setNoReplacement(true);
+        rs.setSampleSizePercent(percent);
+        rs.setInvertSelection(isTest);
+        rs.setInputFormat(originalSet);
+        return Filter.useFilter(originalSet, rs);
+    }
+
     @Override
     public String toString() {
         return dataset.toSummaryString();

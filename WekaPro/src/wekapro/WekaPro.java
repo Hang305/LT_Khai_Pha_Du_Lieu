@@ -27,11 +27,23 @@ public class WekaPro {
 //                "-R 2-3");
 //        model.mineAssociationRules();
 //GPGrowth
-        MyFPGrowthModel model = new MyFPGrowthModel("E:\\\\KPDL\\\\BaiTap\\\\DuLieu\\\\weather.nominal.arff",
-                "-P 2 -I -1 -N 10 -T 0 -C 0.9 -D 0.05 -U 1.0 -M 0.1", 
-                "-R first-last");
-        model.mineAssociationRules();
+//        MyFPGrowthModel model = new MyFPGrowthModel("E:\\\\KPDL\\\\BaiTap\\\\DuLieu\\\\weather.nominal.arff",
+//                "-P 2 -I -1 -N 10 -T 0 -C 0.9 -D 0.05 -U 1.0 -M 0.1", 
+//                "-R first-last");
+//        model.mineAssociationRules();
+//        System.out.println(model);
+//        MyKnowledgeModel model = new MyKnowledgeModel("E:\\KPDL\\Weka\\Weka-3-8-5\\data\\iris.arff", null, null);
+//        model.trainset = model.divideTrainTest(model.dataset, 20, false);
+//        model.testset = model.divideTrainTest(model.dataset, 20, true);
+//        System.out.println(model);
+//        System.out.println(model.trainset.toSummaryString());
+//        System.out.println(model.testset.toSummaryString());
+    
+     MyKnowledgeModel model = new MyKnowledgeModel("E:\\KPDL\\Weka\\Weka-3-8-5\\data\\iris.arff", null, null);
+        model.trainset = model.divideTrainTestR(model.dataset, 80, false);
+        model.testset = model.divideTrainTestR(model.dataset, 80, true);
         System.out.println(model);
-    }
+        System.out.println(model.trainset.toSummaryString());
+        System.out.println(model.testset.toSummaryString());}
 
 }
