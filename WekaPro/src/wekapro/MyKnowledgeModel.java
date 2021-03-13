@@ -44,7 +44,6 @@ public class MyKnowledgeModel {
         if (d_opts != null) {
             this.data_option = weka.core.Utils.splitOptions(d_opts);
         }
-
     }
 
     MyKnowledgeModel(String ekpdlBaiTapDuLieusupermarketarff) {
@@ -104,6 +103,14 @@ public class MyKnowledgeModel {
         rs.setInvertSelection(isTest);
         rs.setInputFormat(originalSet);
         return Filter.useFilter(originalSet, rs);
+    }
+
+    public void saveModel(String filename, Object model) throws Exception {
+        weka.core.SerializationHelper.write(filename, model);
+    }
+
+    public Object loadModel(String filename) throws Exception {
+        return weka.core.SerializationHelper.read(filename);
     }
 
     @Override
