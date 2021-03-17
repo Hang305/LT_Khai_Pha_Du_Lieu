@@ -5,7 +5,7 @@
  */
 package wekapro;
 
-import com.sun.xml.internal.ws.client.sei.ResponseBuilder;
+
 import java.io.File;
 import java.io.IOException;
 import weka.core.Instances;
@@ -38,6 +38,12 @@ public class MyKnowledgeModel {
     public MyKnowledgeModel(String filename, String m_opts, String d_opts) throws Exception {
         this.source = new DataSource(filename);
         this.dataset = source.getDataSet();
+        //NaiveBayes
+        if (!filename.isEmpty()) {
+            this.source= new DataSource(filename);
+            this.dataset = source.getDataSet();
+        }
+                
         if (m_opts != null) {
             this.model_option = weka.core.Utils.splitOptions(m_opts);
         }
@@ -113,9 +119,19 @@ public class MyKnowledgeModel {
         return weka.core.SerializationHelper.read(filename);
     }
 
+    //NaiveBayes
+    public void setTrainset(String filename) throws Exception{
+        DataSource trainSource = new DataSource(filename);
+        this.trainset = trainSource.getDataSet();
+    }
+     public void setTestset(String filename) throws Exception{
+        DataSource testsSource = new DataSource(filename);
+        this.testset = testsSource.getDataSet();
+    }
     @Override
     public String toString() {
         return dataset.toSummaryString();
     }
+    
 
 }

@@ -50,12 +50,21 @@ public class WekaPro {
 //        System.out.println(model.testset.toSummaryString());}
 
 //Mô hình cây quyết định
-        MyDecisionTreeModel model = new MyDecisionTreeModel("C:\\Users\\Admin\\OneDrive\\Máy tính\\data\\iris.arff", "-C 0.25 -M 2", null);
-        model.builDecisionTree();
-        model.evaluateDecisionTree();
+//        MyDecisionTreeModel model = new MyDecisionTreeModel("C:\\Users\\Admin\\OneDrive\\Máy tính\\data\\iris.arff", "-C 0.25 -M 2", null);
+//        model.builDecisionTree();
+//        model.evaluateDecisionTree();
+//        System.out.println(model);
+////        model.saveModel("E:\\KPDL\\BaiTap\\DuLieu\\decisiontree.model", model.tree);
+//        model.tree = (J48)model.loadModel("E:\\KPDL\\BaiTap\\DuLieu\\decisiontree.model");
+//        model.predictClassLabel(model.testset);
+        
+        //NaiveBayes
+        MyNaiveBayesModel model = new MyNaiveBayesModel();
+        model.buildNaiveBayes("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_train.arff");
+        model.evaluateNaiveBayes("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_test.arff");
+        model.predictClassLabel("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_unable.arff",
+                "C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_predict_nb.arff");
+        
         System.out.println(model);
-//        model.saveModel("E:\\KPDL\\BaiTap\\DuLieu\\decisiontree.model", model.tree);
-        model.tree = (J48)model.loadModel("E:\\KPDL\\BaiTap\\DuLieu\\decisiontree.model");
-        model.predictClassLabel(model.testset);
     }
 }
