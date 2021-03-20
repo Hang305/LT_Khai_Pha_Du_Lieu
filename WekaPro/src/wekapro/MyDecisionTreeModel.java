@@ -5,7 +5,7 @@
  */
 package wekapro;
 
-import sun.reflect.generics.tree.Tree;
+//import sun.reflect.generics.tree.Tree;
 import weka.classifiers.Evaluation;
 import weka.classifiers.trees.J48;
 import weka.core.Debug.Random;

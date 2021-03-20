@@ -5,8 +5,7 @@
  */
 package wekapro;
 
-import weka.classifiers.trees.J48;
-
+//import weka.classifiers.trees.J48;
 /**
  *
  * @author Admin
@@ -34,21 +33,18 @@ public class WekaPro {
 //                "-R first-last");
 //        model.mineAssociationRules();
 //        System.out.println(model);
-
 //        MyKnowledgeModel model = new MyKnowledgeModel("E:\\KPDL\\Weka\\Weka-3-8-5\\data\\iris.arff", null, null);
 //        model.trainset = model.divideTrainTest(model.dataset, 20, false);
 //        model.testset = model.divideTrainTest(model.dataset, 20, true);
 //        System.out.println(model);
 //        System.out.println(model.trainset.toSummaryString());
 //        System.out.println(model.testset.toSummaryString());
-
 //     MyKnowledgeModel model = new MyKnowledgeModel("E:\\KPDL\\Weka\\Weka-3-8-5\\data\\iris.arff", null, null);
 //        model.trainset = model.divideTrainTestR(model.dataset, 80, false);
 //        model.testset = model.divideTrainTestR(model.dataset, 80, true);
 //        System.out.println(model);
 //        System.out.println(model.trainset.toSummaryString());
 //        System.out.println(model.testset.toSummaryString());}
-
 //Mô hình cây quyết định
 //        MyDecisionTreeModel model = new MyDecisionTreeModel("C:\\Users\\Admin\\OneDrive\\Máy tính\\data\\iris.arff", "-C 0.25 -M 2", null);
 //        model.builDecisionTree();
@@ -57,14 +53,24 @@ public class WekaPro {
 ////        model.saveModel("E:\\KPDL\\BaiTap\\DuLieu\\decisiontree.model", model.tree);
 //        model.tree = (J48)model.loadModel("E:\\KPDL\\BaiTap\\DuLieu\\decisiontree.model");
 //        model.predictClassLabel(model.testset);
-        
-        //NaiveBayes
+//NaiveBayes
         MyNaiveBayesModel model = new MyNaiveBayesModel();
         model.buildNaiveBayes("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_train.arff");
         model.evaluateNaiveBayes("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_test.arff");
-        model.predictClassLabel("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_unable.arff",
+        model.predictClassLabel("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_unlabel.arff",
                 "C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_predict_nb.arff");
         
         System.out.println(model);
+//Neural Network
+//        
+//        MyNeuralNetworkModel model = new MyNeuralNetworkModel("",
+//                "-L 0.3 -M 0.2 -N 500 -V 0 -S 0 -E 20 -H a -R",
+//                null);
+//         model.buildNeuralNetwork("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_train.arff");
+//        model.evaluateNeuralNetwork("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_test.arff");
+//        model.predictClassLabel("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_unlabel.arff",
+//                "C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_predict_ann.arff");
+//
+//        System.out.println(model);
     }
 }

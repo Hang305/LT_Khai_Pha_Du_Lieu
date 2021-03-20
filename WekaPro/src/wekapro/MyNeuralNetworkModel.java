@@ -6,65 +6,62 @@
 package wekapro;
 
 import java.io.BufferedWriter;
-import java.io.FileWriter;
-
+import  java.io.FileWriter;
+import java.util.Random;
 import weka.classifiers.Evaluation;
-import weka.classifiers.bayes.NaiveBayes;
-import weka.core.Debug;
-
+import weka.classifiers.functions.MultilayerPerceptron;
 import weka.core.Instances;
-//import weka.core.converters.ConverterUtils;
 import weka.core.converters.ConverterUtils.DataSource;
 
-//import weka.core.converters.ConverterUtils.DataSource;
 /**
  *
  * @author Admin
  */
-public class MyNaiveBayesModel extends MyKnowledgeModel {
+public class MyNeuralNetworkModel extends  MyKnowledgeModel{
+    
+    MultilayerPerceptron neural;
 
-    NaiveBayes nbayes;
-
-    public MyNaiveBayesModel() {
+    public MyNeuralNetworkModel() {
         super();
     }
 
-    public MyNaiveBayesModel(String filename, String m_opts, String d_opts) throws Exception {
+    public DataSource getSource() {
+        return source;
+    }
+
+    public MyNeuralNetworkModel(String filename, String m_opts, String d_opts) throws Exception {
         super(filename, m_opts, d_opts);
     }
-
-    public void buildNaiveBayes(String filename) throws Exception {
+    public void buildNeuralNetwork(String filename) throws Exception{
         //doc train set vao bo nho
         setTrainset(filename);
-        this.trainset.setClassIndex(this.trainset.numAttributes() - 1);
-        //huan luyen mo hinh NaiveBayes
-        this.nbayes = new NaiveBayes();
-//        nbayes.setOptions(this.model_option);
-        nbayes.buildClassifier(this.trainset);
+        this.trainset.setClassIndex(this.trainset.numAttributes()-1);
+        //Huan luyen mo hinh mang neural
+        this.neural= new MultilayerPerceptron();
+        neural.setOptions(this.model_options);
+        neural.buildClassifier(this.trainset);
     }
-
-    public void evaluateNaiveBayes(String filename) throws Exception {
+    
+    public void evaluateNeuralNetwork(String filename) throws Exception{
         //doc test set vào bo nho
         setTestset(filename);
         this.testset.setClassIndex(this.testset.numAttributes() - 1);
         //danh gia mo hinh bang 10-fold cross validation
-        Debug.Random rnd = new Debug.Random(1);
+       Random rnd = new Random(1);
         int folds = 10;
         Evaluation eval = new Evaluation(this.trainset);
-        eval.crossValidateModel(nbayes, this.testset, folds, rnd);
+        eval.crossValidateModel(neural, this.testset, folds, rnd);
         System.out.println(eval.toSummaryString(
                 "\nKet qua danh gia mo hinh 10-fold cross validation\n----------\n", false));
-
     }
-
-    public void predictClassLabel(String fileIn, String fileOut) throws Exception {
+     public void predictClassLabel(String fileIn, String fileOut) throws Exception {
         //doc du lieu can du doan vao bo nho
         DataSource ds = new DataSource(fileIn);
         Instances unlabel = ds.getDataSet();
         unlabel.setClassIndex(unlabel.numAttributes() - 1);
         //du doan classLabel cho tung instance
         for (int i = 0; i < unlabel.numInstances(); i++) {
-            double predict = nbayes.classifyInstance(unlabel.instance(i));
+            double predict = neural.classifyInstance(unlabel.instance(i));
             unlabel.instance(i).setClassValue(predict);
 
         }
@@ -78,7 +75,7 @@ public class MyNaiveBayesModel extends MyKnowledgeModel {
 
     @Override
     public String toString() {
-        return this.nbayes.toString();
+        return this.neural.toString(); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
 }
