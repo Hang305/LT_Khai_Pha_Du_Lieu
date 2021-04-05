@@ -54,13 +54,13 @@ public class WekaPro {
 //        model.tree = (J48)model.loadModel("E:\\KPDL\\BaiTap\\DuLieu\\decisiontree.model");
 //        model.predictClassLabel(model.testset);
 //NaiveBayes
-        MyNaiveBayesModel model = new MyNaiveBayesModel();
-        model.buildNaiveBayes("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_train.arff");
-        model.evaluateNaiveBayes("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_test.arff");
-        model.predictClassLabel("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_unlabel.arff",
-                "C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_predict_nb.arff");
-        
-        System.out.println(model);
+//        MyNaiveBayesModel model = new MyNaiveBayesModel();
+//        model.buildNaiveBayes("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_train.arff");
+//        model.evaluateNaiveBayes("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_test.arff");
+//        model.predictClassLabel("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_unlabel.arff",
+//                "C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_predict_nb.arff");
+//        
+//        System.out.println(model);
 //Neural Network
 //        
 //        MyNeuralNetworkModel model = new MyNeuralNetworkModel("",
@@ -72,5 +72,26 @@ public class WekaPro {
 //                "C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_predict_ann.arff");
 //
 //        System.out.println(model);
+//SVM
+//        MySVMModel model = new MySVMModel("",
+//                "-C 1.0 -L 0.001 -P 1.0E-12 -N 0 -V -1 -W 1 -K \"weka.classifiers.functions.supportVector.PolyKernel -E 1.0 -C 250007\" -calibrator \"weka.classifiers.functions.Logistic -R 1.0E-8 -M -1 -num-decimal-places 4\"",
+//                null);
+//        model.buildSVM("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_train.arff");
+//        model.evaluateSVM("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_test.arff");
+//        model.predictClassLabel("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_unlabel.arff",
+//                "C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_predict_svm.arff");
+//
+//        System.out.println(model);
+//Mô hình K-NN - k lân cận
+        MyKNNModel model = new MyKNNModel("",
+                "-K 5 -W 0 -A \"weka.core.neighboursearch.LinearNNSearch -A \\\"weka.core.EuclideanDistance -R first-last\\\"\"",
+                null);
+        model.buildKNN("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_train.arff");
+        model.evaluateKNN("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_test.arff");
+        model.predictClassLabel("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_unlabel.arff",
+                "C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_predict_svm.arff");
+
+        System.out.println(model);
+
     }
 }
