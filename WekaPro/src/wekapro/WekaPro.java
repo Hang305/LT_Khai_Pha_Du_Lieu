@@ -83,15 +83,63 @@ public class WekaPro {
 //
 //        System.out.println(model);
 //Mô hình K-NN - k lân cận
-        MyKNNModel model = new MyKNNModel("",
-                "-K 5 -W 0 -A \"weka.core.neighboursearch.LinearNNSearch -A \\\"weka.core.EuclideanDistance -R first-last\\\"\"",
-                null);
-        model.buildKNN("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_train.arff");
-        model.evaluateKNN("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_test.arff");
-        model.predictClassLabel("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_unlabel.arff",
-                "C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_predict_svm.arff");
+//        MyKNNModel model = new MyKNNModel("",
+//                "-K 5 -W 0 -A \"weka.core.neighboursearch.LinearNNSearch -A \\\"weka.core.EuclideanDistance -R first-last\\\"\"",
+//                null);
+//        model.buildKNN("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_train.arff");
+//        model.evaluateKNN("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_test.arff");
+//        model.predictClassLabel("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_unlabel.arff",
+//                "C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_predict_svm.arff");
+//
+//        System.out.println(model);
+//bagging
+//        MyBaggingModel model = new MyBaggingModel("",
+//                null,
+//                null);
+//        model.buildBaggingModel("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_train.arff");
+//        model.evaluateBaggingModel("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_test.arff");
+//        model.predictClassLabel("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_unlabel.arff",
+//                "C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_predict_bag.arff");
+//
+//        System.out.println("Finished");
+//Boosting
+//        MyBoostingModel model = new MyBoostingModel("",
+//                null,
+//                null);
+//        model.buildBoostingModel("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_train.arff");
+//        model.evaluateBoostingModel("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_test.arff");
+//        model.predictClassLabel("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_unlabel.arff",
+//                "C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_predict_bag.arff");
+//
+//        System.out.println("Finished");
+//voting
+//        MyVotingModel model = new MyVotingModel("",
+//                null,
+//                null);
+//        model.buildVotingModel("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_train.arff");
+//        model.evaluateVotingModel("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_test.arff");
+//        model.predictClassLabel("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_unlabel.arff",
+//                "C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_predict_vote.arff");
+//
+//        System.out.println("Finished");
+//blending
+//        MyBlendingModel model = new MyBlendingModel();
+//        model.buildBlendingModel("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_train.arff");
+//        model.evaluateBlendingModel("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_test.arff");
+//        model.predictClassLabel("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_unlabel.arff",
+//                "C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_predict_blending.arff");
+//
+//        System.out.println("Finished");
+//kmeans
+//        MyKMeansModel model = new MyKMeansModel("", null, null);
+//        model.buildKMeansModel("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_cluster_train.arff");
+//        model.predictCluster("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_cluster_unable.arff");
+//        System.out.println("Finished");
 
-        System.out.println(model);
-
+//EM
+        MyEMModel model = new MyEMModel("", null, null);
+        model.buildEMModel("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_cluster_train.arff");
+        model.predictCluster("C:\\Users\\Admin\\OneDrive\\Máy tính\\data-exp\\iris_cluster_unable.arff");
+        System.out.println("Finished");
     }
 }
